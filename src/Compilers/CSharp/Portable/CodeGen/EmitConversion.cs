@@ -24,6 +24,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     _builder.EmitIntConstant(0);
                     _builder.EmitOpCode(ILOpCode.Conv_u);
                     return;
+                case ConversionKind.ExplicitReference:
+                    // Handle valuetype cast here
+                    if (conversion.Type.IsValueType && conversion.Operand.Type.IsValueType)
+                    {
+                        EmitAddress(conversion.Operand, AddressKind.ReadOnly);
+                        _builder.EmitOpCode(ILOpCode.Ldobj);
+                        EmitSymbolToken(conversion.Type, conversion.Syntax);
+                        return;
+                    }
+                    break;
             }
 
             if (!used && !conversion.ConversionHasSideEffects())
