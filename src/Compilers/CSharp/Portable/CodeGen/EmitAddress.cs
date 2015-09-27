@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     throw ExceptionUtilities.UnexpectedValue(expression.Kind);
 
                 case BoundKind.BaseReference:
-                    Debug.Assert(false, "base is always a reference type, why one may need a reference to it?");
+                    Debug.Assert(expression.Type.IsValueType, "only value types may need a ref to base");
+                    _builder.EmitOpCode(ILOpCode.Ldarg_0);
                     break;
 
                 case BoundKind.Sequence:
