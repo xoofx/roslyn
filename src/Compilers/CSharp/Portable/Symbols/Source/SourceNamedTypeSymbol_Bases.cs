@@ -340,7 +340,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 TypeSymbol baseType;
 
-                if (i == 0 && TypeKind == TypeKind.Class) // allow class in the first position
+                if (i == 0 && (TypeKind == TypeKind.Class || TypeKind == TypeKind.Struct)) // allow class in the first position
                 {
                     baseType = baseBinder.BindType(typeSyntax, diagnostics, newBasesBeingResolved);
 
@@ -440,7 +440,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         continue;
 
                     case TypeKind.Class:
-                        if (TypeKind == TypeKind.Class)
+                    case TypeKind.Struct:
+                        if (TypeKind == TypeKind.Class || TypeKind == TypeKind.Struct)
                         {
                             if ((object)localBase == null)
                             {
