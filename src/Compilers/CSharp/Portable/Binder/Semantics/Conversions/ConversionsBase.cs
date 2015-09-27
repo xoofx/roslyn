@@ -100,7 +100,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert((object)baseType != null);
 
             // A base class has got to be a class. The derived type might be a struct, enum, or delegate.
-            if (!baseType.IsClassType())
+            if (!baseType.IsClassType() && !(derivedType.IsValueType && baseType.IsValueType))
             {
                 return false;
             }
@@ -1750,6 +1750,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             if (HasExplicitReferenceTypeParameterConversion(source, destination, ref useSiteDiagnostics))
+            {
+                return true;
+            }
+
+            // Allow convert for valuetype
+            if (source.IsValueType && destination.IsValueType &&
+                IsBaseClass(source, destination, ref useSiteDiagnostics))
             {
                 return true;
             }
