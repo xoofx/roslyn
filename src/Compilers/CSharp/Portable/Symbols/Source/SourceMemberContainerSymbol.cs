@@ -282,7 +282,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 case TypeKind.Interface:
                     mods |= DeclarationModifiers.Abstract;
                     break;
-                case TypeKind.Struct:
                 case TypeKind.Enum:
                     mods |= DeclarationModifiers.Sealed;
                     break;
