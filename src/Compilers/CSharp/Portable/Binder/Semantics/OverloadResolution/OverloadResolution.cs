@@ -843,7 +843,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return true;
                 }
 
-                else if (currentType.IsClassType() && type.IsClassType() && currentType.IsDerivedFrom(type, ignoreDynamic: false, useSiteDiagnostics: ref useSiteDiagnostics))
+                else if (((currentType.IsClassType() && type.IsClassType()) || (currentType.IsValueType && type.IsValueType)) && currentType.IsDerivedFrom(type, ignoreDynamic: false, useSiteDiagnostics: ref useSiteDiagnostics))
                 {
                     return true;
                 }
@@ -2799,7 +2799,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var argType = argument.Type;
-            if ((object)argType != null && Conversions.HasIdentityConversion(argType, parameterType))
+            if ((object)argType != null && ((argType.IsValueType && parameterType.IsValueType && ConversionsBase.IsBaseClass(argType, parameterType, ref useSiteDiagnostics)) || Conversions.HasIdentityConversion(argType, parameterType)))
             {
                 return Conversion.Identity;
             }
