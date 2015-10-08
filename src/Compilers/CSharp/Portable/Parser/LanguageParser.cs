@@ -4915,7 +4915,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             switch (this.CurrentToken.Kind)
             {
                 case SyntaxKind.StackAllocKeyword:
-                    StackAllocArrayCreationExpressionSyntax stackAllocExpr = this.ParseStackAllocExpression();
+                    var stackAllocExpr = this.ParseStackAllocExpression();
                     if (!allowStackAlloc)
                     {
                         // CONSIDER: this is what dev10 reports (assuming unsafe constructs are allowed at all),
@@ -9341,7 +9341,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             else
             {
                 // assume object creation as default case
-                return this.ParseArrayOrObjectCreationExpression();
+                return this.ParseArrayOrObjectCreationExpression(false);
             }
         }
 
@@ -9483,9 +9483,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return this.CurrentToken.Kind == SyntaxKind.OpenBracketToken;
         }
 
-        private ExpressionSyntax ParseArrayOrObjectCreationExpression()
+        private ExpressionSyntax ParseArrayOrObjectCreationExpression(bool isStackAlloc)
         {
-            SyntaxToken @new = this.EatToken(SyntaxKind.NewKeyword);
+            SyntaxToken newOrStackAlloc = isStackAlloc ? this.EatToken(SyntaxKind.StackAllocKeyword) : this.EatToken(SyntaxKind.NewKeyword);
             bool isPossibleArrayCreation = this.IsPossibleArrayCreationExpression();
             var type = this.ParseTypeCore(parentIsParameter: false, isOrAs: false, expectSizes: isPossibleArrayCreation, isArrayCreation: isPossibleArrayCreation);
 
@@ -9506,7 +9506,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     }
                 }
 
-                return _syntaxFactory.ArrayCreationExpression(@new, (ArrayTypeSyntax)type, initializer);
+                return _syntaxFactory.ArrayCreationExpression(newOrStackAlloc, (ArrayTypeSyntax)type, initializer);
             }
             else
             {
@@ -9531,7 +9531,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         SyntaxFactory.MissingToken(SyntaxKind.CloseParenToken));
                 }
 
-                return _syntaxFactory.ObjectCreationExpression(@new, type, argumentList, initializer);
+                return _syntaxFactory.ObjectCreationExpression(newOrStackAlloc, type, argumentList, initializer);
             }
         }
 
@@ -9890,16 +9890,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 expected);
         }
 
-        private StackAllocArrayCreationExpressionSyntax ParseStackAllocExpression()
+        private ExpressionSyntax ParseStackAllocExpression()
         {
-            var stackAlloc = this.EatToken(SyntaxKind.StackAllocKeyword);
-            var elementType = this.ParseTypeCore(parentIsParameter: false, isOrAs: false, expectSizes: true, isArrayCreation: false);
-            if (elementType.Kind != SyntaxKind.ArrayType)
-            {
-                elementType = this.AddError(elementType, ErrorCode.ERR_BadStackAllocExpr);
-            }
-
-            return _syntaxFactory.StackAllocArrayCreationExpression(stackAlloc, elementType);
+            return ParseArrayOrObjectCreationExpression(true);
         }
 
         private AnonymousMethodExpressionSyntax ParseAnonymousMethodExpression()

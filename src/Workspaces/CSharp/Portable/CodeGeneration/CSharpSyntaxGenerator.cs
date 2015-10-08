@@ -3413,7 +3413,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         public override SyntaxNode ObjectCreationExpression(SyntaxNode type, IEnumerable<SyntaxNode> arguments)
         {
-            return SyntaxFactory.ObjectCreationExpression((TypeSyntax)type, CreateArgumentList(arguments), null);
+            return SyntaxFactory.ObjectCreationExpression((TypeSyntax)type, CreateArgumentList(arguments));
         }
 
         private ArgumentListSyntax CreateArgumentList(IEnumerable<SyntaxNode> arguments)

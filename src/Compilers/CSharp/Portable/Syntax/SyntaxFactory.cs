@@ -1688,6 +1688,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return node;
         }
+        public static ObjectCreationExpressionSyntax ObjectCreationExpression(TypeSyntax type, ArgumentListSyntax argumentList)
+        {
+            return SyntaxFactory.ObjectCreationExpression(Token(SyntaxKind.NewKeyword), type, argumentList, default(InitializerExpressionSyntax));
+        }
+
+        public static ObjectCreationExpressionSyntax ObjectCreationExpression(SyntaxToken newKeyword, TypeSyntax type, ArgumentListSyntax argumentList)
+        {
+            return SyntaxFactory.ObjectCreationExpression(newKeyword, type, argumentList, default(InitializerExpressionSyntax));
+        }
 
         /// <summary>
         /// Given a conditional binding expression, find corresponding conditional access node.
