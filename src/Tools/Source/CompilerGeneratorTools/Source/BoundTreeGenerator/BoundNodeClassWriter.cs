@@ -1677,6 +1677,7 @@ namespace BoundTreeGenerator
                 case "readonly":
                 case "sealed":
                 case "const":
+                case "transient":
                 case "new":
                 case "override":
                 case "abstract":

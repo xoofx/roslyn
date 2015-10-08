@@ -868,6 +868,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return SyntaxKind.SealedKeyword;
                 case "const":
                     return SyntaxKind.ConstKeyword;
+                case "transient":
+                    return SyntaxKind.TransientKeyword;
                 case "fixed":
                     return SyntaxKind.FixedKeyword;
                 case "stackalloc":
@@ -1404,6 +1406,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return "sealed";
                 case SyntaxKind.ConstKeyword:
                     return "const";
+                case SyntaxKind.TransientKeyword:
+                    return "transient";
                 case SyntaxKind.FixedKeyword:
                     return "fixed";
                 case SyntaxKind.StackAllocKeyword:

@@ -665,6 +665,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         //ERR_ExtensionTypeParam = 1111,
         ERR_ExplicitExtension = 1112,
         ERR_ValueTypeExtDelegate = 1113,
+
+        ERR_BadRefWithTransient = 1114,
+        ERR_BadOutWithTransient = 1115,
+
         // unused 1114-1199
         // Below five error codes are unused.
         // WRN_FeatureDeprecated2 = 1200,

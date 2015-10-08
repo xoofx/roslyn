@@ -4013,6 +4013,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 case SyntaxKind.OpenBracketToken: // attribute
                 case SyntaxKind.RefKeyword:
                 case SyntaxKind.OutKeyword:
+                case SyntaxKind.TransientKeyword:
                 case SyntaxKind.ParamsKeyword:
                 case SyntaxKind.ArgListKeyword:
                     return true;
@@ -4170,6 +4171,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             Ref = 0x02,
             Out = 0x04,
             Params = 0x08,
+            Transient = 0x10,
         }
 
         private static ParamFlags GetParamFlags(SyntaxKind kind, bool allowThisKeyword)
@@ -4187,6 +4189,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     return ParamFlags.Out;
                 case SyntaxKind.ParamsKeyword:
                     return ParamFlags.Params;
+                case SyntaxKind.TransientKeyword:
+                    return ParamFlags.Transient;
                 default:
                     return ParamFlags.None;
             }
@@ -4203,6 +4207,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 if (mod.Kind == SyntaxKind.ThisKeyword ||
                     mod.Kind == SyntaxKind.RefKeyword ||
                     mod.Kind == SyntaxKind.OutKeyword ||
+                    mod.Kind == SyntaxKind.TransientKeyword ||
                     mod.Kind == SyntaxKind.ParamsKeyword)
                 {
                     if (mod.Kind == SyntaxKind.ThisKeyword)
@@ -4248,6 +4253,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         {
                             mod = this.AddError(mod, ErrorCode.ERR_MultiParamMod);
                         }
+                        else if ((flags & ParamFlags.Transient) != 0)
+                        {
+                            mod = this.AddError(mod, ErrorCode.ERR_BadRefWithTransient);
+                        }
                         else
                         {
                             flags |= ParamFlags.Ref;
@@ -4271,6 +4280,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         {
                             mod = this.AddError(mod, ErrorCode.ERR_MultiParamMod);
                         }
+                        else if ((flags & ParamFlags.Transient) != 0)
+                        {
+                            mod = this.AddError(mod, ErrorCode.ERR_BadOutWithTransient);
+                        }
                         else
                         {
                             flags |= ParamFlags.Out;
@@ -4289,6 +4302,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         else if ((flags & (ParamFlags.Ref | ParamFlags.Out | ParamFlags.This)) != 0)
                         {
                             mod = this.AddError(mod, ErrorCode.ERR_MultiParamMod);
+                        }
+                        else
+                        {
+                            flags |= ParamFlags.Params;
+                        }
+                    }
+                    else if (mod.Kind == SyntaxKind.TransientKeyword)
+                    {
+                        if ((flags & ParamFlags.Ref) != 0)
+                        {
+                            mod = this.AddError(mod, ErrorCode.ERR_BadRefWithTransient);
+                        }
+                        else if ((flags & ParamFlags.Out) != 0)
+                        {
+                            mod = this.AddError(mod, ErrorCode.ERR_BadOutWithTransient);
                         }
                         else
                         {
@@ -4579,7 +4607,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         {
             Fixed = 0x01,
             Const = 0x02,
-            Local = 0x04
+            Local = 0x04,
+            Transient = 0x08
         }
 
         private static SyntaxTokenList GetOriginalModifiers(CSharp.CSharpSyntaxNode decl)
@@ -4641,6 +4670,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             if (mods.Any(SyntaxKind.ConstKeyword))
             {
                 flags |= VariableFlags.Const;
+            }
+
+            if (mods.Any(SyntaxKind.TransientKeyword))
+            {
+                flags |= VariableFlags.Transient;
             }
 
             if (parent != null && (parent.Kind() == SyntaxKind.VariableDeclaration || parent.Kind() == SyntaxKind.LocalDeclarationStatement))
@@ -7028,6 +7062,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 case SyntaxKind.CheckedKeyword:
                 case SyntaxKind.UncheckedKeyword:
                 case SyntaxKind.ConstKeyword:
+                case SyntaxKind.TransientKeyword:
                 case SyntaxKind.DoKeyword:
                 case SyntaxKind.ForKeyword:
                 case SyntaxKind.ForEachKeyword:
@@ -8028,6 +8063,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 case SyntaxKind.StaticKeyword:
                 case SyntaxKind.ReadOnlyKeyword:
                 case SyntaxKind.VolatileKeyword:
+                case SyntaxKind.TransientKeyword:
                     return true;
                 default:
                     return false;
