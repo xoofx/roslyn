@@ -142,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     case SyntaxKind.LocalDeclarationStatement:
                         // only const locals have modifiers and those don't have a sequence point:
-                        Debug.Assert(!((LocalDeclarationStatementSyntax)declarationSyntax.Parent).Modifiers.Any());
+                        // ClassAsValue: Allow transient modifier here
+                        // Debug.Assert(!((LocalDeclarationStatementSyntax)declarationSyntax.Parent).Modifiers.Any());
                         GetFirstLocalOrFieldBreakpointSpan(default(SyntaxTokenList), declaratorSyntax, out node, out part);
                         break;
 

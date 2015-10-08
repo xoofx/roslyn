@@ -10,5 +10,6 @@ namespace Microsoft.CodeAnalysis
         None = 0,
         ByRef = 1,
         Pinned = 2,
+        ClassAsValue = 4
     }
 }

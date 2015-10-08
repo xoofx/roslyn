@@ -4373,7 +4373,7 @@ namespace Microsoft.Cci
                     writer.WriteByte(0x10);
                 }
 
-                this.SerializeTypeReference(local.Type, writer, false, true);
+                this.SerializeTypeReference(local.Type, writer, false, true, (local.Constraints & LocalSlotConstraints.ClassAsValue) != 0);
             }
         }
 
@@ -5020,7 +5020,7 @@ namespace Microsoft.Cci
             }
         }
 
-        private void SerializeTypeReference(ITypeReference typeReference, BlobBuilder writer, bool noTokens, bool treatRefAsPotentialTypeSpec)
+        private void SerializeTypeReference(ITypeReference typeReference, BlobBuilder writer, bool noTokens, bool treatRefAsPotentialTypeSpec, bool forceValueType = false)
         {
             while (true)
             {
@@ -5230,7 +5230,7 @@ namespace Microsoft.Cci
                 }
                 else
                 {
-                    if (typeReference.IsValueType)
+                    if (forceValueType || typeReference.IsValueType)
                     {
                         writer.WriteByte(0x11);
                     }

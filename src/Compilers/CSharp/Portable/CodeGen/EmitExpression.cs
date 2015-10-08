@@ -4,8 +4,10 @@ using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.CodeAnalysis.CodeGen;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeGen
@@ -1660,14 +1662,37 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 }
                 else
                 {
-                    EmitArguments(expression.Arguments, constructor.Parameters);
-
                     var stackAdjustment = GetObjCreationStackBehavior(expression);
-                    _builder.EmitOpCode(ILOpCode.Newobj, stackAdjustment);
+                    var creationSyntax = (ObjectCreationExpressionSyntax) expression.Syntax;
+                    if (creationSyntax.NewKeyword.Kind() == SyntaxKind.StackAllocKeyword)
+                    {
+                        // ClassAsValue: Simple codegen for stackalloc ClassConstructor()
+                        var temp = this.AllocateTemp(expression.Type, expression.Syntax, LocalSlotConstraints.ClassAsValue);
 
-                    // for variadic ctors emit expanded ctor token
-                    EmitSymbolToken(constructor, expression.Syntax,
-                                    constructor.IsVararg ? (BoundArgListOperator)expression.Arguments[expression.Arguments.Length - 1] : null);
+                        _builder.EmitLocalAddress(temp);                  //  ldloca temp. stack++                   (stack = 1)
+                        _builder.EmitOpCode(ILOpCode.Initobj);            //  intitobj  <MyClass>                    (stack = 0)
+                        EmitSymbolToken(expression.Type, expression.Syntax);
+
+                        _builder.EmitLocalAddress(temp);                  //  ldloca temp. stack++                   (stack = 1)
+                        _builder.EmitOpCode(ILOpCode.Dup, 1);                  //  ldloca temp. stack++              (stack = 2)
+                        EmitArguments(expression.Arguments, constructor.Parameters); // stack += args.Length;        (stack = 2 + n)
+                        _builder.EmitOpCode(ILOpCode.Call, stackAdjustment - 1); // stack = stack + 1 - args.Length - 1;   (stack = 2)
+                        // for variadic ctors emit expanded ctor token
+                        EmitSymbolToken(constructor, expression.Syntax,
+                                        constructor.IsVararg ? (BoundArgListOperator)expression.Arguments[expression.Arguments.Length - 1] : null);
+                        _builder.AdjustStack(-1); // (stack = 1)
+                    }
+                    else
+                    {
+                        EmitArguments(expression.Arguments, constructor.Parameters);
+
+                        _builder.EmitOpCode(ILOpCode.Newobj, stackAdjustment);
+
+                        // for variadic ctors emit expanded ctor token
+                        EmitSymbolToken(constructor, expression.Syntax,
+                                        constructor.IsVararg ? (BoundArgListOperator)expression.Arguments[expression.Arguments.Length - 1] : null);
+                    }
+
 
                     EmitPopIfUnused(used);
                 }
