@@ -92,11 +92,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             var isMetadataVirtualIgnoringModifiers = (object)explicitInterfaceType != null; //explicit impls must be marked metadata virtual
 
-            this.MakeFlags(methodKind, declarationModifiers, returnsVoid, isExtensionMethod, isMetadataVirtualIgnoringModifiers);
-
             _typeParameters = (syntax.Arity == 0) ?
                 ImmutableArray<TypeParameterSymbol>.Empty :
                 MakeTypeParameters(syntax, diagnostics);
+
+            this.MakeFlags(methodKind, declarationModifiers, returnsVoid, isExtensionMethod, isMetadataVirtualIgnoringModifiers);
 
             bool hasBlockBody = syntax.Body != null;
             _isExpressionBodied = !hasBlockBody && syntax.ExpressionBody != null;
@@ -310,6 +310,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     Debug.Assert(_lazyReturnTypeCustomModifiers.IsDefault);
                     _lazyReturnTypeCustomModifiers = ImmutableArray<CustomModifier>.Empty;
+                }
+            }
+
+            // Code for checking if a method is a CompilerIntrinsic
+            var attributes = GetAttributes();
+            if (//IsExtern && // We relax the Extern requirement, as we don't know how to remove the method from generated assembly
+                IsStatic &&
+                ParameterCount == 1 &&
+                Parameters[0].IsParams &&  // TODO: check param type is object
+                attributes.Length != 0 &&
+                (ReturnsVoid || (_typeParameters.Length == 1 && ReturnType == _typeParameters[0])))
+            {
+                foreach (var attr in attributes)
+                {
+                    if (attr.AttributeClass.Name == "CompilerIntrinsicAttribute" &&
+                        attr.AttributeClass.ContainingNamespace.QualifiedName == "System.Runtime.CompilerServices")
+                    {
+                        
+                        this.flags.MethodKind = MethodKind.CompilerIntrinsic;
+                        break;
+                    }
                 }
             }
 

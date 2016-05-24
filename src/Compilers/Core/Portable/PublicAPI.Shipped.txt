@@ -774,6 +774,7 @@ Microsoft.CodeAnalysis.MethodKind.BuiltinOperator = 15 -> Microsoft.CodeAnalysis
 Microsoft.CodeAnalysis.MethodKind.Constructor = 1 -> Microsoft.CodeAnalysis.MethodKind
 Microsoft.CodeAnalysis.MethodKind.Conversion = 2 -> Microsoft.CodeAnalysis.MethodKind
 Microsoft.CodeAnalysis.MethodKind.DeclareMethod = 16 -> Microsoft.CodeAnalysis.MethodKind
+Microsoft.CodeAnalysis.MethodKind.CompilerIntrinsic = 17 -> Microsoft.CodeAnalysis.MethodKind
 Microsoft.CodeAnalysis.MethodKind.DelegateInvoke = 3 -> Microsoft.CodeAnalysis.MethodKind
 Microsoft.CodeAnalysis.MethodKind.Destructor = 4 -> Microsoft.CodeAnalysis.MethodKind
 Microsoft.CodeAnalysis.MethodKind.EventAdd = 5 -> Microsoft.CodeAnalysis.MethodKind

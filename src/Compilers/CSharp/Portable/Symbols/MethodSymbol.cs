@@ -470,6 +470,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 case MethodKind.ExplicitInterfaceImplementation:
                 case MethodKind.StaticConstructor:
                 case MethodKind.ReducedExtension:
+                case MethodKind.CompilerIntrinsic:
                     return false;
                 case MethodKind.Conversion:
                 case MethodKind.DelegateInvoke:
@@ -996,6 +997,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         return MethodKind.ReducedExtension;
                     case MethodKind.StaticConstructor:
                         return MethodKind.StaticConstructor;
+                    case MethodKind.CompilerIntrinsic:
+                        return MethodKind.CompilerIntrinsic;
                     default:
                         throw ExceptionUtilities.UnexpectedValue(this.MethodKind);
                 }

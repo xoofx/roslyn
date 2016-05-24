@@ -2405,6 +2405,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
+        public override BoundNode VisitILEmit(BoundILEmit node)
+        {
+            // TODO: Not sure exactly what is the purpose of this class/Visit method
+            var savedState = this.State;
+            SetState(UnreachableState());
+            if (node.Bound != null)
+            {
+                Visit(node.Bound);
+            }
+            SetState(savedState);
+            return null;
+        }
+
         public override BoundNode VisitAddressOfOperator(BoundAddressOfOperator node)
         {
             VisitAddressOfOperator(node, shouldReadOperand: false);

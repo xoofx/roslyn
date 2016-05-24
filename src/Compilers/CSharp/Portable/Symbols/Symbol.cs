@@ -496,6 +496,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     switch (method.MethodKind)
                     {
                         case MethodKind.Ordinary:
+                        case MethodKind.CompilerIntrinsic:
                         case MethodKind.DelegateInvoke:
                         case MethodKind.Destructor: // See comment in CanBeReferencedByName.
                             return true;

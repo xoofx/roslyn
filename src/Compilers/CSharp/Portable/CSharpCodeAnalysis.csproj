@@ -67,6 +67,7 @@
     <Compile Include="Binder\Binder.QueryUnboundLambdaState.cs" />
     <Compile Include="Binder\Binder.RangeVariableMap.cs" />
     <Compile Include="Binder\Binder.WithQueryLambdaParametersBinder.cs" />
+    <Compile Include="Binder\BinderILEmit.cs" />
     <Compile Include="Binder\Binder_AnonymousTypes.cs" />
     <Compile Include="Binder\Binder_Attributes.cs" />
     <Compile Include="Binder\Binder_Await.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Binder\ForEachLoopBinder.cs" />
     <Compile Include="Binder\ForLoopBinder.cs" />
     <Compile Include="Binder\HostObjectModeBinder.cs" />
+    <Compile Include="Binder\ILInstruction.cs" />
     <Compile Include="Binder\ImplicitlyTypedFieldBinder.cs" />
     <Compile Include="Binder\ImplicitlyTypedLocalBinder.cs" />
     <Compile Include="Binder\ImportChain.cs" />
@@ -206,6 +208,7 @@
     <Compile Include="CodeGen\EmitArrayInitializer.cs" />
     <Compile Include="CodeGen\EmitConversion.cs" />
     <Compile Include="CodeGen\EmitExpression.cs" />
+    <Compile Include="CodeGen\EmitILEmit.cs" />
     <Compile Include="CodeGen\EmitOperators.cs" />
     <Compile Include="CodeGen\EmitStatement.cs" />
     <Compile Include="CodeGen\Optimizer.cs" />

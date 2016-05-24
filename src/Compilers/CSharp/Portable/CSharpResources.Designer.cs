@@ -4544,6 +4544,15 @@ namespace Microsoft.CodeAnalysis.CSharp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid IL ASM instruction.
+        /// </summary>
+        internal static string ERR_ILInvalidInstruction {
+            get {
+                return ResourceManager.GetString("ERR_ILInvalidInstruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An __arglist expression may only appear inside of a call or new expression.
         /// </summary>
         internal static string ERR_IllegalArglist {

@@ -94,6 +94,11 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Declare Sub or Function.
         /// </summary>
-        DeclareMethod = 16
+        DeclareMethod = 16,
+
+        /// <summary>
+        /// Compiler intrinsic method
+        /// </summary>
+        CompilerIntrinsic = 17
     }
 }

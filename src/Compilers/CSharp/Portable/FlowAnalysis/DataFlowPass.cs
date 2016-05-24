@@ -6,6 +6,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using Microsoft.CodeAnalysis.CodeGen;
 using Microsoft.CodeAnalysis.Collections;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -1380,6 +1381,37 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             Debug.Assert(localsOpt.All(_usedVariables.Contains));
 
+            return result;
+        }
+
+
+        public override BoundNode VisitILEmit(BoundILEmit node)
+        {
+            switch (node.ILInstruction.OpCode)
+            {
+                case ILOpCode.Stloc:
+                    var boundLocal = node.Bound as BoundLocal;
+                    if (boundLocal != null)
+                    {
+                        int slot = GetOrCreateSlot(boundLocal.LocalSymbol);
+                        SetSlotAssigned(slot);
+                    }
+                    break;
+                case ILOpCode.Stloc_0:
+                    SetSlotAssigned(0);
+                    break;
+                case ILOpCode.Stloc_1:
+                    SetSlotAssigned(1);
+                    break;
+                case ILOpCode.Stloc_2:
+                    SetSlotAssigned(2);
+                    break;
+                case ILOpCode.Stloc_3:
+                    SetSlotAssigned(3);
+                    break;
+            }
+
+            var result = base.VisitILEmit(node);
             return result;
         }
 

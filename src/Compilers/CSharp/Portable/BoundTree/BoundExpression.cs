@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using Microsoft.CodeAnalysis.CodeGen;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
@@ -538,6 +540,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return this.ConstantValueOpt;
             }
         }
+    }
+
+    internal partial class BoundILEmit
+    {
+        internal ILInstruction ILInstruction { get; set; }
+
+        internal BoundExpression Bound { get; set; }
     }
 
     // NOTE: this type exists in order to hide the presence of {Value,Type}Expression inside of a

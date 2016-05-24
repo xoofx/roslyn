@@ -87,6 +87,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     }
                     break;
 
+                case BoundKind.ILEmit:
+                    EmitILEmitExpression((BoundILEmit) expression);
+                    break;
+
                 case BoundKind.Call:
                     EmitCallExpression((BoundCall)expression, used);
                     break;
@@ -1548,6 +1552,35 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             {
                 // The call pops all the arguments.
                 stack -= call.Arguments.Length;
+            }
+
+            return stack;
+        }
+
+        private static int GetCallStackBehavior(MethodSymbol method)
+        {
+            int stack = 0;
+
+            if (!method.ReturnsVoid)
+            {
+                // The call puts the return value on the stack.
+                stack += 1;
+            }
+
+            if (!method.IsStatic)
+            {
+                // The call pops the receiver off the stack.
+                stack -= 1;
+            }
+
+            if (method.IsVararg)
+            {
+                throw new NotImplementedException("Vararg is not supported for method");
+            }
+            else
+            {
+                // The call pops all the arguments.
+                stack -= method.ParameterCount;
             }
 
             return stack;

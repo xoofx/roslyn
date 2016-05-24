@@ -4683,4 +4683,7 @@ To remove the warning, you can use /reference instead (set the Embed Interop Typ
   <data name="ERR_PeWritingFailure" xml:space="preserve">
     <value>An error occurred while writing the output file: {0}</value>
   </data>
+  <data name="ERR_ILInvalidInstruction" xml:space="preserve">
+    <value>Invalid IL ASM instruction</value>
+  </data>
 </root>

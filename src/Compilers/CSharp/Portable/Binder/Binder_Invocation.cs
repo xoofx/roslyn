@@ -151,18 +151,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             // M(__arglist()) is legal, but M(__arglist(__arglist()) is not!
             bool isArglist = node.Expression.Kind() == SyntaxKind.ArgListExpression;
             AnalyzedArguments analyzedArguments = AnalyzedArguments.GetInstance();
-            BindArgumentsAndNames(node.ArgumentList, diagnostics, analyzedArguments, allowArglist: !isArglist);
 
             if (isArglist)
             {
+                BindArgumentsAndNames(node.ArgumentList, diagnostics, analyzedArguments);
                 result = BindArgListOperator(node, diagnostics, analyzedArguments);
             }
             else
             {
-                BoundExpression boundExpression = BindMethodGroup(node.Expression, invoked: true, indexed: false, diagnostics: diagnostics);
-                boundExpression = CheckValue(boundExpression, BindValueKind.RValueOrMethodGroup, diagnostics);
-                string name = boundExpression.Kind == BoundKind.MethodGroup ? GetName(node.Expression) : null;
-                result = BindInvocationExpression(node, node.Expression, name, boundExpression, analyzedArguments, diagnostics);
+                var boundExpression = BindMethodGroup(node.Expression, invoked: true, indexed: false, diagnostics: diagnostics);
+
+                // Try to replace compiler intrinsic on BoundCall
+                if (!TryCompilerIntrinsic(node, boundExpression, diagnostics, out result))
+                {
+                    BindArgumentsAndNames(node.ArgumentList, diagnostics, analyzedArguments, true);
+                    boundExpression = CheckValue(boundExpression, BindValueKind.RValueOrMethodGroup, diagnostics);
+                    string name = boundExpression.Kind == BoundKind.MethodGroup ? GetName(node.Expression) : null;
+                    result = BindInvocationExpression(node, node.Expression, name, boundExpression, analyzedArguments, diagnostics);
+                }
             }
 
             analyzedArguments.Free();

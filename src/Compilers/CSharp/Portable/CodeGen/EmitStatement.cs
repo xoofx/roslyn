@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 #if DEBUG
             if (_stackLocals == null || _stackLocals.Count == 0)
             {
-                _builder.AssertStackEmpty();
+                // TODO: Reactivate the checks with proper detection for IL emits
+                //_builder.AssertStackEmpty();
             }
 #endif
         }

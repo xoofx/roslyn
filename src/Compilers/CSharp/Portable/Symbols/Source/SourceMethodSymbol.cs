@@ -61,6 +61,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             public MethodKind MethodKind
             {
                 get { return (MethodKind)((_flags >> MethodKindOffset) & MethodKindMask); }
+                set
+                {
+                    _flags =  (_flags & ~MethodKindMask) | ((int)value << MethodKindOffset);
+                }
             }
 
             public bool IsExtensionMethod
@@ -254,6 +258,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected void SetReturnsVoid(bool returnsVoid)
         {
             this.flags.ReturnsVoid = returnsVoid;
+        }
+
+        internal bool IsCompilerIntrinsic
+        {
+            get { return MethodKind == MethodKind.CompilerIntrinsic; }
         }
 
         /// <remarks>
