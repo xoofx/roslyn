@@ -389,7 +389,7 @@ function Build-NuGetPackages() {
     function Pack-All([string]$packageKind, $extraArgs) {
 
         Write-Host "Packing for $packageKind"
-        foreach ($item in Get-ChildItem *.nuspec) {
+        foreach ($item in Get-ChildItem Conan.*.nuspec) {
             $name = Split-Path -leaf $item
             Pack-One $name $packageKind -extraArgs $extraArgs
         }
