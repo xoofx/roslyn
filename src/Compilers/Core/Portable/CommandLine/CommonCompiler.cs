@@ -660,6 +660,8 @@ namespace Microsoft.CodeAnalysis
                 analyzerCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                 analyzerExceptionDiagnostics = new DiagnosticBag();
                 var analyzerOptions = new AnalyzerOptions(ImmutableArray<AdditionalText>.CastUp(additionalTextFiles));
+               
+                compilation = CompilationRewriterDriver.Rewrite(analyzers, compilation, Arguments.OutputDirectory, analyzerExceptionDiagnostics.Add);
 
                 analyzerDriver = AnalyzerDriver.CreateAndAttachToCompilation(
                     compilation,

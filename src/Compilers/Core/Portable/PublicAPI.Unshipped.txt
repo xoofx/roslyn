@@ -13,6 +13,21 @@ const Microsoft.CodeAnalysis.WellKnownMemberNames.DisposeAsyncMethodName = "Disp
 const Microsoft.CodeAnalysis.WellKnownMemberNames.DisposeMethodName = "Dispose" -> string
 const Microsoft.CodeAnalysis.WellKnownMemberNames.GetAsyncEnumeratorMethodName = "GetAsyncEnumerator" -> string
 const Microsoft.CodeAnalysis.WellKnownMemberNames.MoveNextAsyncMethodName = "MoveNextAsync" -> string
+Microsoft.CodeAnalysis.ICompilationRewriter
+Microsoft.CodeAnalysis.CompilationRewriterContext
+Microsoft.CodeAnalysis.CompilationRewriterContext.Compilation.get -> Microsoft.CodeAnalysis.Compilation
+Microsoft.CodeAnalysis.CompilationRewriterContext.Encoding.get -> System.Text.Encoding
+Microsoft.CodeAnalysis.CompilationRewriterContext.Encoding.set -> void
+Microsoft.CodeAnalysis.CompilationRewriterContext.OutputFolder.get -> string
+Microsoft.CodeAnalysis.CompilationRewriterContext.GetOutputFilePath(string fileNamePrefix, string fileExtension = null) -> string
+Microsoft.CodeAnalysis.CompilationRewriterContext.SaveSyntaxTree(Microsoft.CodeAnalysis.SyntaxTree tree) -> void
+Microsoft.CodeAnalysis.CompilationRewriterContext.ReportDiagnostic(Microsoft.CodeAnalysis.Diagnostic diagnostic) -> void
+Microsoft.CodeAnalysis.ICompilationRewriter.Rewrite(Microsoft.CodeAnalysis.CompilationRewriterContext context) -> Microsoft.CodeAnalysis.Compilation
+Microsoft.CodeAnalysis.CompilationRewriter
+Microsoft.CodeAnalysis.CompilationRewriter.CompilationRewriter() -> void
+abstract Microsoft.CodeAnalysis.CompilationRewriter.Rewrite(Microsoft.CodeAnalysis.CompilationRewriterContext context) -> Microsoft.CodeAnalysis.Compilation
+override Microsoft.CodeAnalysis.CompilationRewriter.Initialize(Microsoft.CodeAnalysis.Diagnostics.AnalysisContext context) -> void
+override Microsoft.CodeAnalysis.CompilationRewriter.SupportedDiagnostics.get -> System.Collections.Immutable.ImmutableArray<Microsoft.CodeAnalysis.DiagnosticDescriptor>
 Microsoft.CodeAnalysis.Compilation.HasImplicitConversion(Microsoft.CodeAnalysis.ITypeSymbol fromType, Microsoft.CodeAnalysis.ITypeSymbol toType) -> bool
 Microsoft.CodeAnalysis.Compilation.IsSymbolAccessibleWithin(Microsoft.CodeAnalysis.ISymbol symbol, Microsoft.CodeAnalysis.ISymbol within, Microsoft.CodeAnalysis.ITypeSymbol throughType = null) -> bool
 Microsoft.CodeAnalysis.Diagnostics.OperationAnalysisContext.GetControlFlowGraph() -> Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowGraph

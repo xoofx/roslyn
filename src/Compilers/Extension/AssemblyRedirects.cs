@@ -3,5 +3,5 @@
 using Microsoft.VisualStudio.Shell;
 using Roslyn.VisualStudio.Setup;
 
-[assembly: ProvideRoslynBindingRedirection("Microsoft.Build.Tasks.CodeAnalysis.dll")]
+[assembly: ProvideRoslynBindingRedirection("Conan.Build.Tasks.CodeAnalysis.dll")]
 [assembly: ProvideRoslynBindingRedirection("Roslyn.Compilers.Extension.dll")]

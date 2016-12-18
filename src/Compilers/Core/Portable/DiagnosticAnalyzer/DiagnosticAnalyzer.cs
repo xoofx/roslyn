@@ -10,6 +10,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// </summary>
     public abstract class DiagnosticAnalyzer
     {
+        internal AnalyzerFileReference FileReference { get; private set; }
+
+        internal void SetFileReference(AnalyzerFileReference fileReference)
+        {
+            FileReference = fileReference;
+        }
+
         /// <summary>
         /// Returns a set of descriptors for the diagnostics that this analyzer is capable of producing.
         /// </summary>

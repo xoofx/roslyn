@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Conan.Net.Compilers</id>
+    <summary>
+      .NET Compilers package.
+    
+      Conan is a lightweight fork of the NET Compiler Platform ("Roslyn") by adding a compiler plugin infrastructure.
+    </summary>
+    <description>
+      .NET Compilers package.
+      Referencing this package will cause the project to be built using the specific version of the C# and Visual Basic compilers contained in the package, as opposed to any system installed version.
+
+      This package can be used to compile code targeting any platform, but can only be run using the desktop .NET 4.6+ Full Framework.
+
+      More details at https://github.com/xoofx/Conan
+
+      $commitPathMessage$
+    
+      Conan is a lightweight fork of the NET Compiler Platform ("Roslyn") by adding a compiler plugin infrastructure.
+    </description>
+    <language>en-US</language>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <version>$version$</version>
+    <authors>$authors$</authors>
+    <licenseUrl>$licenseUrlNonRedist$</licenseUrl>
+    <projectUrl>$projectUrl$</projectUrl>
+    <releaseNotes>$releaseNotes$</releaseNotes>
+    <tags>$tags$</tags>
+    <developmentDependency>true</developmentDependency>
+    <iconUrl>https://raw.githubusercontent.com/xoofx/Conan/master/img/conan.png</iconUrl>
+  </metadata>
+  <files>
+    <file src="$additionalFilesPath$/Conan.Net.Compilers.props" target="build/Conan.Net.Compilers.props" />
+    <file src="$additionalFilesPath$/ThirdPartyNotices.rtf" target="" />
+
+    <!-- ****************************************************** -->
+    <!-- Used by the full framework (when running from msbuild) -->
+    <!-- ****************************************************** -->
+
+    <!-- The Roslyn built binaries must be taken from these locations because this is 
+         the location where signing occurs -->
+    <file src="Dlls\CodeAnalysis\Microsoft.CodeAnalysis.dll" target="tools/full" />
+    <file src="Dlls\CodeAnalysis\Microsoft.DiaSymReader.Native.amd64.dll" target="tools/full" />
+    <file src="Dlls\CodeAnalysis\Microsoft.DiaSymReader.Native.x86.dll" target="tools/full" />
+    <file src="Dlls\CSharpCodeAnalysis\Microsoft.CodeAnalysis.CSharp.dll" target="tools/full" />
+    <file src="Dlls\Scripting\Microsoft.CodeAnalysis.Scripting.dll" target="tools/full" />
+    <file src="Dlls\CSharpScripting\Microsoft.CodeAnalysis.CSharp.Scripting.dll" target="tools/full" />
+    <file src="Dlls\BasicCodeAnalysis\Microsoft.CodeAnalysis.VisualBasic.dll" target="tools/full" />
+    <file src="Exes\csc\net46\csc.exe" target="tools/full" />
+    <file src="Exes\csc\net46\csc.exe.config" target="tools/full" />
+    <file src="Exes\csc\net46\csc.rsp" target="tools/full" />
+    <file src="Exes\csi\net46\csi.exe" target="tools/full" />
+    <file src="Exes\csi\net46\csi.exe.config" target="tools/full" />
+    <file src="Exes\csi\net46\csi.rsp" target="tools/full" />
+    <file src="Exes\vbc\net46\vbc.exe" target="tools/full" />
+    <file src="Exes\vbc\net46\vbc.exe.config" target="tools/full" />
+    <file src="Exes\vbc\net46\vbc.rsp" target="tools/full" />
+    <file src="Exes\VBCSCompiler\net46\VBCSCompiler.exe" target="tools/full" />
+    <file src="Exes\VBCSCompiler\net46\VBCSCompiler.exe.config" target="tools/full" />
+    <file src="Dlls\MSBuildTask\net46\Conan.Build.Tasks.CodeAnalysis.dll" target="tools/full" />
+    <file src="Dlls\MSbuildTask\net46\Microsoft.Managed.Core.targets" target="tools/full" />
+    <file src="Dlls\MSbuildTask\net46\Microsoft.CSharp.Core.targets" target="tools/full" />
+    <file src="Dlls\MSbuildTask\net46\Microsoft.VisualBasic.Core.targets" target="tools/full" />
+    <!-- The assemblies are not signed by us and any deployed copy can be used.
+         The Exes\Toolset directory specifically has all of the assemblies we need.
+
+         N.B. This list of facades must be kept in-sync with the
+         other facades used by the compiler. Facades are listed in
+         the src/Setup/DevDivInsertionFiles/BuildDevDivInsertionFiles.vb file, the
+         src/Setup/DevDivVsix/CompilersPackage/Microsoft.CodeAnalysis.Compilers.swr file,
+         and src/Compilers/Extension/CompilerExtension.csproj file. -->
+    <file src="Exes\Toolset\System.AppContext.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Console.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Collections.Immutable.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Diagnostics.FileVersionInfo.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Diagnostics.StackTrace.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.IO.Compression.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.IO.FileSystem.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.IO.FileSystem.Primitives.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.IO.Pipes.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.IO.Pipes.AccessControl.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Reflection.Metadata.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Security.AccessControl.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Security.Claims.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Security.Cryptography.Algorithms.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Security.Cryptography.Encoding.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Security.Cryptography.Primitives.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Security.Cryptography.X509Certificates.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Security.Principal.Windows.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Text.Encoding.CodePages.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.ValueTuple.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Xml.ReaderWriter.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Xml.XmlDocument.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Xml.XPath.dll" target="tools/full" />
+    <file src="Exes\Toolset\System.Xml.XPath.XDocument.dll" target="tools/full" />
+
+    <!-- ****************************************************** -->
+    <!-- Used by the core framework (when running from dotnet) -->
+    <!-- ****************************************************** -->
+
+    <!-- Targets and task files -->
+    <file src="Dlls/MSBuildTask/netcoreapp2.0/Conan.Build.Tasks.CodeAnalysis.dll" target="tools/core" />
+    <file src="Dlls/MSBuildTask/netcoreapp2.0/Microsoft.Managed.Core.targets" target="tools/core" />
+    <file src="Dlls/MSBuildTask/netcoreapp2.0/Microsoft.CSharp.Core.targets" target="tools/core" />
+    <file src="Dlls/MSBuildTask/netcoreapp2.0/Microsoft.VisualBasic.Core.targets" target="tools/core" />
+    <!-- N.B.: The backslashes below cannot be replaced with forward slashes. 
+         https://github.com/NuGet/Home/issues/3584 -->
+    <file src="Dlls\MSBuildTask\netcoreapp2.0\publish\runtimes\**" target="tools\core\runtimes" />
+    <!-- Compiler exe files -->
+    <file src="Dlls/CodeAnalysis/Microsoft.CodeAnalysis.dll" target="tools/core" />
+    <file src="Dlls/CSharpCodeAnalysis/Microsoft.CodeAnalysis.CSharp.dll" target="tools/core" />
+    <file src="Exes/csc/netcoreapp2.0/publish/csc.dll" target="tools/core" />
+    <file src="Exes/csc/netcoreapp2.0/publish/csc.deps.json" target="tools/core" />
+    <file src="Exes/csc/netcoreapp2.0/publish/csc.runtimeconfig.json" target="tools/core" />
+    <file src="$additionalFilesPath$/RunCsc" target="tools/core/RunCsc" />
+    <file src="$additionalFilesPath$/RunCsc.cmd" target="tools/core" />
+    <file src="Dlls/BasicCodeAnalysis/Microsoft.CodeAnalysis.VisualBasic.dll" target="tools/core" />
+    <file src="Exes/vbc/netcoreapp2.0/publish/vbc.dll" target="tools/core" />
+    <file src="Exes/vbc/netcoreapp2.0/publish/vbc.deps.json" target="tools/core" />
+    <file src="Exes/vbc/netcoreapp2.0/publish/vbc.runtimeconfig.json" target="tools/core" />
+    <file src="$additionalFilesPath$/RunVbc" target="tools/core/RunVbc" />
+    <file src="$additionalFilesPath$/RunVbc.cmd" target="tools/core" />
+    <file src="Exes/VBCSCompiler/netcoreapp2.0/publish/VBCSCompiler.dll" target="tools/core" />
+    <file src="Exes/VBCSCompiler/netcoreapp2.0/publish/VBCSCompiler.deps.json" target="tools/core" />
+    <file src="Exes/VBCSCompiler/netcoreapp2.0/publish/VBCSCompiler.runtimeconfig.json" target="tools/core" />
+    <!-- Satellite assemblies -->
+    <file src="Dlls\MSBuildTask\**\Conan.Build.Tasks.CodeAnalysis.resources.dll" target="tools/core" />
+    <file src="Dlls\CodeAnalysis\**\Microsoft.CodeAnalysis.resources.dll" target="tools/core" />
+    <file src="Dlls\CSharpCodeAnalysis\**\Microsoft.CodeAnalysis.CSharp.resources.dll" target="tools/core" />
+    <file src="Dlls\BasicCodeAnalysis\**\Microsoft.CodeAnalysis.VisualBasic.resources.dll" target="tools/core" />
+    <!-- References that are either not in the target framework or are a higher version -->
+    <!-- N.B.: The backslashes below cannot be replaced with forward slashes.
+         https://github.com/NuGet/Home/issues/3584 -->
+    <file src="Exes\csc\netcoreapp2.0\publish\System.*.dll" target="tools\core" />
+    <file src="Exes\csc\netcoreapp2.0\publish\runtimes\**" target="tools\core\runtimes" />
+    
+  </files>
+</package>
