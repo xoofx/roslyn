@@ -111,7 +111,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             {
                 case "System":
                 case "System.Core":
-                case "Microsoft.Build.Tasks.CodeAnalysis.resources":
+                case "Conan.Build.Tasks.CodeAnalysis.resources":
                     // These are failures are expected by design.
                     break;
                 default:

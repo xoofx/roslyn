@@ -17,7 +17,7 @@
     <_Version Condition="'$(NuGetPackageKind)' == 'bootstrap'">42.42.42.42-bootstrap</_Version>
 
     <_CommitPathMessage>This an unofficial build from a developer's machine</_CommitPathMessage>
-    <_CommitPathMessage Condition="'$(UseRealCommit)' == 'true'">This package was built from the source at https://github.com/dotnet/roslyn/commit/$(GitHeadSha)</_CommitPathMessage>
+    <_CommitPathMessage Condition="'$(UseRealCommit)' == 'true'">This package was built from the source at https://github.com/conan-roslyn/Conan/commit/$(GitHeadSha)</_CommitPathMessage>
 
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
@@ -25,17 +25,17 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NuspecFile></NuspecFile>
     <NuspecProperties>$(NuspecProperties);version=$(_Version)</NuspecProperties>
-    <NuspecProperties>$(NuspecProperties);authors=Microsoft</NuspecProperties>
+    <NuspecProperties>$(NuspecProperties);authors=Alexandre Mutel</NuspecProperties>
     <NuspecProperties>$(NuspecProperties);licenseUrlRedist=http://go.microsoft.com/fwlink/?LinkId=529443</NuspecProperties>
     <NuspecProperties>$(NuspecProperties);licenseUrlNonRedist=http://go.microsoft.com/fwlink/?LinkId=529444</NuspecProperties>
     <NuspecProperties>$(NuspecProperties);licenseUrlSource=https://github.com/dotnet/roslyn/blob/master/License.txt</NuspecProperties>
-    <NuspecProperties>$(NuspecProperties);projectUrl=https://github.com/dotnet/roslyn</NuspecProperties>
+    <NuspecProperties>$(NuspecProperties);projectUrl=https://github.com/conan-roslyn/Conan</NuspecProperties>
     <NuspecProperties>$(NuspecProperties);additionalFilesPath=$(RepoRoot)build/NuGetAdditionalFiles</NuspecProperties>
     <NuspecProperties>$(NuspecProperties);srcDirPath=$(RepoRoot)\src</NuspecProperties>
     <NuspecProperties Condition="'$(EmptyDir)' != ''">$(NuspecProperties);emptyDirPath=$(EmptyDir)</NuspecProperties>
     <NuspecProperties Condition="'$(CurrentVersion)' != ''">$(NuspecProperties);currentVersion=$(CurrentVersion)</NuspecProperties>
     <NuspecProperties>$(NuspecProperties);commitPathMessage=$(_CommitPathMessage)</NuspecProperties>
-    <NuspecProperties>$(NuspecProperties);tags=Roslyn CodeAnalysis Compiler CSharp VB VisualBasic Parser Scanner Lexer Emit CodeGeneration Metadata IL Compilation Scripting Syntax Semantics</NuspecProperties>
+    <NuspecProperties>$(NuspecProperties);tags=Conan Roslyn CodeAnalysis Compiler Plugins CSharp VB VisualBasic Parser Scanner Lexer Emit CodeGeneration Metadata IL Compilation Scripting Syntax Semantics</NuspecProperties>
 
     <!-- The set of NuGet packages whose versions we need in the NuSpec file -->
     <NuspecProperties>$(NuspecProperties);MicrosoftBuildFixedVersion=$(MicrosoftBuildFixedVersion)</NuspecProperties>

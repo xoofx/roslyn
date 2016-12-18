@@ -760,7 +760,7 @@ Public Class BuildDevDivInsertionFiles
                 End If
 
                 ' Don't add in the netcoreapp2.0 version of DLL
-                if Path.GetFileName(parent) = "netcoreapp2.0" AndAlso name = "Microsoft.Build.Tasks.CodeAnalysis.dll" Then
+                if Path.GetFileName(parent) = "netcoreapp2.0" AndAlso name = "Conan.Build.Tasks.CodeAnalysis.dll" Then
                     Continue For
                 End If
 

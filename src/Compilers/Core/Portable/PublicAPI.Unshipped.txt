@@ -1,0 +1,15 @@
+Microsoft.CodeAnalysis.ICompilationRewriter
+Microsoft.CodeAnalysis.CompilationRewriterContext
+Microsoft.CodeAnalysis.CompilationRewriterContext.Compilation.get -> Microsoft.CodeAnalysis.Compilation
+Microsoft.CodeAnalysis.CompilationRewriterContext.Encoding.get -> System.Text.Encoding
+Microsoft.CodeAnalysis.CompilationRewriterContext.Encoding.set -> void
+Microsoft.CodeAnalysis.CompilationRewriterContext.OutputFolder.get -> string
+Microsoft.CodeAnalysis.CompilationRewriterContext.GetOutputFilePath(string fileNamePrefix, string fileExtension = null) -> string
+Microsoft.CodeAnalysis.CompilationRewriterContext.SaveSyntaxTree(Microsoft.CodeAnalysis.SyntaxTree tree) -> void
+Microsoft.CodeAnalysis.CompilationRewriterContext.ReportDiagnostic(Microsoft.CodeAnalysis.Diagnostic diagnostic) -> void
+Microsoft.CodeAnalysis.ICompilationRewriter.Rewrite(Microsoft.CodeAnalysis.CompilationRewriterContext context) -> Microsoft.CodeAnalysis.Compilation
+Microsoft.CodeAnalysis.CompilationRewriter
+Microsoft.CodeAnalysis.CompilationRewriter.CompilationRewriter() -> void
+abstract Microsoft.CodeAnalysis.CompilationRewriter.Rewrite(Microsoft.CodeAnalysis.CompilationRewriterContext context) -> Microsoft.CodeAnalysis.Compilation
+override Microsoft.CodeAnalysis.CompilationRewriter.Initialize(Microsoft.CodeAnalysis.Diagnostics.AnalysisContext context) -> void
+override Microsoft.CodeAnalysis.CompilationRewriter.SupportedDiagnostics.get -> System.Collections.Immutable.ImmutableArray<Microsoft.CodeAnalysis.DiagnosticDescriptor>

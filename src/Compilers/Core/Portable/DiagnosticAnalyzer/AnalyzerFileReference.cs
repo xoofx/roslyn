@@ -132,6 +132,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal void AddAnalyzers(ImmutableArray<DiagnosticAnalyzer>.Builder builder, string language)
         {
             _diagnosticAnalyzers.AddExtensions(builder, language);
+
+            // We need to store a reference from the analyzer back to its AnalyzerFileReference
+            // in order to recover the assembly information for the assembly compilation rewriter
+            foreach(var analyzer in builder)
+            {
+                analyzer.SetFileReference(this);
+            }
         }
 
         private static AnalyzerLoadFailureEventArgs CreateAnalyzerFailedArgs(Exception e, string typeNameOpt = null)

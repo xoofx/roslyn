@@ -7,7 +7,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <OutputType>Library</OutputType>
     <RootNamespace>Microsoft.CodeAnalysis.BuildTasks</RootNamespace>
-    <AssemblyName>Microsoft.Build.Tasks.CodeAnalysis</AssemblyName>
+    <AssemblyName>Conan.Build.Tasks.CodeAnalysis</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetFrameworks>$(RoslynPortableTargetFrameworks46)</TargetFrameworks>
     <DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
