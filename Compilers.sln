@@ -156,8 +156,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.CodeAnalysis.Scri
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.CodeAnalysis.Package", "src\NuGet\Microsoft.CodeAnalysis.Package.csproj", "{2483917E-7024-4D10-99C6-2BEF338FF53B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompilerBenchmarks", "src\Tools\CompilerBenchmarks\CompilerBenchmarks.csproj", "{B446E771-AB52-41C9-ACFC-FDF8EACAF291}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildBoss", "src\Tools\BuildBoss\BuildBoss.csproj", "{8A02AFAF-F622-4E3E-9E1A-8CFDACC7C7E1}"
 EndProject
 Global

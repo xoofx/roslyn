@@ -15,7 +15,7 @@
 
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
-    <PackageId>Microsoft.CodeAnalysis.Build.Tasks</PackageId>
+    <PackageId>Conan.CodeAnalysis.Build.Tasks</PackageId>
 
     <PackageDescription>
       The build task and targets used by MSBuild to run the C# and VB compilers.

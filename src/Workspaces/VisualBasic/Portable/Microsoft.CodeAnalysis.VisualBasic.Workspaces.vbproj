@@ -11,6 +11,7 @@
 
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
+    <PackageId>Conan.CodeAnalysis.VisualBasic.Workspaces</PackageId>
     <PackageDescription>
       .NET Compiler Platform ("Roslyn") support for analyzing Visual Basic projects and solutions.
     </PackageDescription>

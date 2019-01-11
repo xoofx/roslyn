@@ -6,7 +6,7 @@
 
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
-    <PackageId>Microsoft.CodeAnalysis</PackageId>
+    <PackageId>Conan.CodeAnalysis</PackageId>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageDescription>
       .NET Compiler Platform ("Roslyn").

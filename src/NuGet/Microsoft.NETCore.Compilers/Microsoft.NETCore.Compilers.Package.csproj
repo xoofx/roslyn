@@ -5,7 +5,7 @@
     <RoslynProjectType>Custom</RoslynProjectType>
 
     <IsPackable>true</IsPackable>
-    <NuspecPackageId>Microsoft.NETCore.Compilers</NuspecPackageId>
+    <NuspecPackageId>Conan.NETCore.Compilers</NuspecPackageId>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <DevelopmentDependency>true</DevelopmentDependency>
     <PackageDescription>
@@ -36,8 +36,8 @@
       <_File Include="$(MSBuildProjectDirectory)\tools\bincore\*.cmd" TargetDir="tools\bincore" />
 
       <_File Include="$(ArtifactsBinDir)Microsoft.Build.Tasks.CodeAnalysis\$(Configuration)\netcoreapp2.1\publish\*.targets" TargetDir="tools" />
-      <_File Include="$(ArtifactsBinDir)Microsoft.Build.Tasks.CodeAnalysis\$(Configuration)\netcoreapp2.1\publish\Microsoft.Build.Tasks.CodeAnalysis.dll" TargetDir="tools" />
-      <_File Include="$(ArtifactsBinDir)Microsoft.Build.Tasks.CodeAnalysis\$(Configuration)\netcoreapp2.1\publish\**\Microsoft.Build.Tasks.CodeAnalysis.resources.dll" TargetDir="tools" />
+      <_File Include="$(ArtifactsBinDir)Microsoft.Build.Tasks.CodeAnalysis\$(Configuration)\netcoreapp2.1\publish\Conan.Build.Tasks.CodeAnalysis.dll" TargetDir="tools" />
+      <_File Include="$(ArtifactsBinDir)Microsoft.Build.Tasks.CodeAnalysis\$(Configuration)\netcoreapp2.1\publish\**\Conan.Build.Tasks.CodeAnalysis.resources.dll" TargetDir="tools" />
       <_File Include="$(ArtifactsBinDir)Microsoft.Build.Tasks.CodeAnalysis\$(Configuration)\netcoreapp2.1\publish\runtimes\**\*.*" TargetDir="tools\runtimes" />
 
       <_File Include="$(ArtifactsBinDir)Microsoft.CodeAnalysis\$(Configuration)\netstandard2.0\Microsoft.CodeAnalysis.dll" TargetDir="tools\bincore" />

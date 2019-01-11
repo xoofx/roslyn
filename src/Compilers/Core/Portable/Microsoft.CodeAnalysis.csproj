@@ -15,7 +15,7 @@
 
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
-    <PackageId>Microsoft.CodeAnalysis.Common</PackageId>
+    <PackageId>Conan.CodeAnalysis.Common</PackageId>
     <PackageDescription>
       A shared package used by the Microsoft .NET Compiler Platform ("Roslyn").
       Do not install this package manually, it will be added as a prerequisite by other packages that require it.
@@ -78,7 +78,7 @@
     <InternalsVisibleTo Include="vbc" />
     <InternalsVisibleTo Include="vbi" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CompilerServer" />
-    <InternalsVisibleTo Include="Microsoft.Build.Tasks.CodeAnalysis" />
+    <InternalsVisibleTo Include="Conan.Build.Tasks.CodeAnalysis" />
     <InternalsVisibleTo Include="VBCSCompiler" />
     <InternalsVisibleTo Include="VBCSCompilerPortable" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests" />

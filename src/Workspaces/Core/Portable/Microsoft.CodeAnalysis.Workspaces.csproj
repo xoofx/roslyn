@@ -13,7 +13,7 @@
 
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
-    <PackageId>Microsoft.CodeAnalysis.Workspaces.Common</PackageId>
+    <PackageId>Conan.CodeAnalysis.Workspaces.Common</PackageId>
     <PackageDescription>
       A shared package used by the .NET Compiler Platform ("Roslyn") including support for analyzing projects and solutions.
       Do not install this package manually, it will be added as a prerequisite by other packages that require it.
